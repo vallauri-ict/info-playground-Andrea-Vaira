@@ -73,5 +73,14 @@ namespace WindowsForms02
             }
         }
 
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ModaleInfo f = new ModaleInfo();
+            f.Text = "Info software";
+            if (f.ShowDialog() != DialogResult.Cancel)
+            {
+                f.Close();
+            }
+        }
     }
 }

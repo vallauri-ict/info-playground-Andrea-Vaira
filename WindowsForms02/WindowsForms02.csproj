@@ -70,6 +70,12 @@
     <Compile Include="ModaleEsci.Designer.cs">
       <DependentUpon>ModaleEsci.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModaleInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModaleInfo.Designer.cs">
+      <DependentUpon>ModaleInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Figlia1.resx">
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModaleEsci.resx">
       <DependentUpon>ModaleEsci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModaleInfo.resx">
+      <DependentUpon>ModaleInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
