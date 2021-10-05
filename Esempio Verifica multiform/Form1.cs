@@ -12,24 +12,40 @@ namespace Esempio_Verifica_multiform
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        public Form1(CheckBox chkPelle, CheckBox chkStoffa, ComboBox cmbMarca)
-        {
-            this.chkPelle = chkPelle;
-            this.chkStoffa = chkStoffa;
-            this.cmbMarca = cmbMarca;
-        }
+        public bool pelle = false;
+        public bool stoffa = false;
+        public string marca = "";
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chkStoffa.Checked = false;
-            chkPelle.Checked = false;
-            cmbMarca.Select(0,0);
+
         }
 
+        private void chkPelle_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!pelle)
+                pelle = true;
+            else
+                pelle = false;
+        }
+
+        private void chkStoffa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!stoffa)
+                stoffa = true;
+            else
+                stoffa = false;
+        }
+
+        private void cmbMarca_SelectedValueChanged(object sender, EventArgs e)
+        {
+            marca = cmbMarca.SelectedItem.ToString();
+        }
     }
 }

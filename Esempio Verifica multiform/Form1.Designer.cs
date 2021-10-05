@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkPelle = new System.Windows.Forms.CheckBox();
             this.chkStoffa = new System.Windows.Forms.CheckBox();
+            this.chkPelle = new System.Windows.Forms.CheckBox();
             this.cmbMarca = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -46,16 +46,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rivestimenti";
             // 
-            // chkPelle
-            // 
-            this.chkPelle.AutoSize = true;
-            this.chkPelle.Location = new System.Drawing.Point(16, 19);
-            this.chkPelle.Name = "chkPelle";
-            this.chkPelle.Size = new System.Drawing.Size(49, 17);
-            this.chkPelle.TabIndex = 0;
-            this.chkPelle.Text = "Pelle";
-            this.chkPelle.UseVisualStyleBackColor = true;
-            // 
             // chkStoffa
             // 
             this.chkStoffa.AutoSize = true;
@@ -65,6 +55,18 @@
             this.chkStoffa.TabIndex = 1;
             this.chkStoffa.Text = "Stoffa";
             this.chkStoffa.UseVisualStyleBackColor = true;
+            this.chkStoffa.CheckedChanged += new System.EventHandler(this.chkStoffa_CheckedChanged);
+            // 
+            // chkPelle
+            // 
+            this.chkPelle.AutoSize = true;
+            this.chkPelle.Location = new System.Drawing.Point(16, 19);
+            this.chkPelle.Name = "chkPelle";
+            this.chkPelle.Size = new System.Drawing.Size(49, 17);
+            this.chkPelle.TabIndex = 0;
+            this.chkPelle.Text = "Pelle";
+            this.chkPelle.UseVisualStyleBackColor = true;
+            this.chkPelle.CheckedChanged += new System.EventHandler(this.chkPelle_CheckedChanged);
             // 
             // cmbMarca
             // 
@@ -78,6 +80,7 @@
             this.cmbMarca.Name = "cmbMarca";
             this.cmbMarca.Size = new System.Drawing.Size(105, 21);
             this.cmbMarca.TabIndex = 1;
+            this.cmbMarca.SelectedValueChanged += new System.EventHandler(this.cmbMarca_SelectedValueChanged);
             // 
             // Form1
             // 

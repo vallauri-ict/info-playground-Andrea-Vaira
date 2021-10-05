@@ -10,13 +10,11 @@ using System.Windows.Forms;
 
 namespace Esempio_Verifica_multiform
 {
-    public partial class Form2 : Form
+    public partial class FormModale : Form
     {
-        public Form2(string label)
+        public FormModale()
         {
             InitializeComponent();
-            this.lbl.Text = label;
         }
-
     }
 }
