@@ -27,12 +27,18 @@ namespace Esempio_Verifica_multiform
 
         }
 
+        internal void pulisciCampi()
+        {
+            //
+        }
+
         private void chkPelle_CheckedChanged(object sender, EventArgs e)
         {
             if (!pelle)
                 pelle = true;
             else
                 pelle = false;
+
         }
 
         private void chkStoffa_CheckedChanged(object sender, EventArgs e)

@@ -25,7 +25,15 @@ namespace Esempio_Verifica_multiform
 
         private void apri1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (form1 == null)
+                form1 = new Form1();
+            form1.pulisciCampi();
             form1.MdiParent = this;
+            if (!(form2 == null))
+            {
+                form2.Hide();
+            }
+                
             form1.Show();
         }
 
@@ -47,6 +55,7 @@ namespace Esempio_Verifica_multiform
 
                 form2 = new Form2(label);
                 form2.MdiParent = this;
+                form1.Hide();
                 form2.Show();
 
                 lblStatusStrip.Text = "La tua auto e'una ";
@@ -65,11 +74,6 @@ namespace Esempio_Verifica_multiform
                 this.Close();
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            form1 = new Form1();
-            
-        }
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
