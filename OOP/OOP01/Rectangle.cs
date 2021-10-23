@@ -23,7 +23,6 @@ namespace OOP01
         {
             side1 = lato1;
             side2 = lato2;
-
         }
     }
 }
