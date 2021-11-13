@@ -21,6 +21,8 @@ namespace OOP05_Dictionary
         int pos = 0;
 
         Dictionary<int, libro> dicLibri = new Dictionary<int, libro>();
+        Queue<libro> codaLibri = new Queue<libro>();
+        Stack<libro> pilaLibri = new Stack<libro>();
         public Form1()
         {
             InitializeComponent();
@@ -53,6 +55,38 @@ namespace OOP05_Dictionary
         {
             libro l = dicLibri[Convert.ToInt32(numericUpDown1.Value)];
             MessageBox.Show("Libro: " + l.titolo + "\nAutore: " + l.autore);
+        }
+
+        private void btnAddCoda_Click(object sender, EventArgs e)
+        {
+            libro l;
+
+            l.titolo = txtTitolo.Text;
+            l.autore = txtAutore.Text;
+
+            codaLibri.Enqueue(l);
+        }
+
+        private void btnAddPila_Click(object sender, EventArgs e)
+        {
+            libro l;
+
+            l.titolo = txtTitolo.Text;
+            l.autore = txtAutore.Text;
+
+            pilaLibri.Push(l);
+        }
+
+        private void btnEstraiCoda_Click(object sender, EventArgs e)
+        {
+            libro l = codaLibri.Dequeue();
+            MessageBox.Show("Titolo: "+l.titolo+"\nAutore: "+l.autore);
+        }
+
+        private void btnEstraiPila_Click(object sender, EventArgs e)
+        {
+            libro l = pilaLibri.Pop();
+            MessageBox.Show("Titolo: " + l.titolo + "\nAutore: " + l.autore);
         }
     }
 }
