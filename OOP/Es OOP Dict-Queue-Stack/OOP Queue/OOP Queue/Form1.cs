@@ -35,13 +35,16 @@ namespace OOP_Queue
             paziente p;
 
             p.nome = txtNome.Text;
+            txtNome.Text = "";
             p.eta = Convert.ToInt32(txtEta.Text);
+            txtEta.Text = "";
             p.colore = comboBox1.SelectedItem.ToString();
-            p.temperatura = Convert.ToInt32(txtTemperatura);
-            if (p.temperatura > 37)
+            p.temperatura = Convert.ToInt32(txtTemperatura.Text);
+            if (p.temperatura < 37)
                 inserisciInCoda(p);
             else
                 MessageBox.Show("Non è possibile far accede il paziente alla struttura");
+            txtTemperatura.Text = "";
         }
 
         private void inserisciInCoda(paziente p)
@@ -66,7 +69,36 @@ namespace OOP_Queue
             }
             catch (Exception)
             {
+                MessageBox.Show("Il caricamento del paziente non è andato  a buon fine");
+            }
+        }
 
+        private void btnNewPaziente_Click(object sender, EventArgs e)
+        {
+            paziente p;
+            if(rosso.Count > 0)
+            {
+                p = rosso.Dequeue();
+                MessageBox.Show("Paziente: "+p.nome+"\nColore: "+p.colore);
+            }
+            else if(giallo.Count > 0)
+            {
+                p = giallo.Dequeue();
+                MessageBox.Show("Paziente: " + p.nome + "\nColore: " + p.colore);
+            }
+            else if( verde.Count > 0)
+            {
+                p = verde.Dequeue();
+                MessageBox.Show("Paziente: " + p.nome + "\nColore: " + p.colore);
+            }
+            else if(bianco.Count > 0)
+            {
+                p = bianco.Dequeue();
+                MessageBox.Show("Paziente: " + p.nome + "\nColore: " + p.colore);
+            }
+            else
+            {
+                MessageBox.Show("Non c'è nessun paziente in attesa");
             }
         }
     }
