@@ -25,6 +25,9 @@ namespace OOP_Queue
         Queue<paziente> verde = new Queue<paziente>();
         Queue<paziente> bianco = new Queue<paziente>();
 
+        float tMax = 0;
+        float tMin = 45;
+
         public Form1()
         {
             InitializeComponent();
@@ -40,11 +43,15 @@ namespace OOP_Queue
             txtEta.Text = "";
             p.colore = comboBox1.SelectedItem.ToString();
             p.temperatura = Convert.ToInt32(txtTemperatura.Text);
-            if (p.temperatura < 37)
-                inserisciInCoda(p);
-            else
-                MessageBox.Show("Non è possibile far accede il paziente alla struttura");
+            inserisciInCoda(p);
+            if ((float)p.temperatura > tMax)
+                tMax = p.temperatura;
+            if ((float)p.temperatura < tMin)
+                tMin = p.temperatura;
             txtTemperatura.Text = "";
+
+            comboBox1.SelectedIndex = -1;
+            txtNome.Focus();
         }
 
         private void inserisciInCoda(paziente p)
@@ -100,6 +107,11 @@ namespace OOP_Queue
             {
                 MessageBox.Show("Non c'è nessun paziente in attesa");
             }
+        }
+
+        private void btnTemperature_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("La temperatura massima misurata è: "+tMax.ToString()+ "\nLa temperatura massima misurata è: "+tMin.ToString());
         }
     }
 }

@@ -39,6 +39,7 @@
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNewPaziente = new System.Windows.Forms.Button();
+            this.btnTemperature = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,15 +152,26 @@
             this.btnNewPaziente.UseVisualStyleBackColor = true;
             this.btnNewPaziente.Click += new System.EventHandler(this.btnNewPaziente_Click);
             // 
+            // btnTemperature
+            // 
+            this.btnTemperature.Location = new System.Drawing.Point(12, 203);
+            this.btnTemperature.Name = "btnTemperature";
+            this.btnTemperature.Size = new System.Drawing.Size(157, 32);
+            this.btnTemperature.TabIndex = 2;
+            this.btnTemperature.Text = "Temperatura Max e Min";
+            this.btnTemperature.UseVisualStyleBackColor = true;
+            this.btnTemperature.Click += new System.EventHandler(this.btnTemperature_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 333);
+            this.ClientSize = new System.Drawing.Size(189, 250);
+            this.Controls.Add(this.btnTemperature);
             this.Controls.Add(this.btnNewPaziente);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Hospital";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -179,6 +191,7 @@
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNewPaziente;
+        private System.Windows.Forms.Button btnTemperature;
     }
 }
 
