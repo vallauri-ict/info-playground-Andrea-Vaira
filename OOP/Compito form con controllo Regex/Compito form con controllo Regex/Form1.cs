@@ -20,12 +20,21 @@ namespace Compito_form_con_controllo_Regex
 
         private void txtNome_Leave(object sender, EventArgs e)
         {
+            Regex reg = new Regex(@"^[a-zA-Z]{3}$");
+            if (!reg.IsMatch(txtNome.Text))
+            {
+                MessageBox.Show("Inserire input corretto");
+            }
 
         }
 
         private void txtCognome_Leave(object sender, EventArgs e)
         {
-
+            Regex reg = new Regex(@"^[a-zA-Z]{3}$");
+            if (!reg.IsMatch(txtCognome.Text))
+            {
+                MessageBox.Show("Inserire input corretto");
+            }
         }
 
         private void txtEtà_Leave(object sender, EventArgs e)
