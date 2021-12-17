@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -48,6 +49,25 @@
             this.btnRegistrati = new System.Windows.Forms.Button();
             this.txtCF = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.epNome = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCognome = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epEta = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCAP = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCitta = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCF = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epMail = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epUsername = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epPassword = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblResult = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.epNome)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCognome)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epEta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCAP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCitta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epMail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epUsername)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPassword)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -224,6 +244,7 @@
             this.btnRegistrati.TabIndex = 17;
             this.btnRegistrati.Text = "Registrati";
             this.btnRegistrati.UseVisualStyleBackColor = true;
+            this.btnRegistrati.Click += new System.EventHandler(this.btnRegistrati_Click);
             // 
             // txtCF
             // 
@@ -245,11 +266,56 @@
             this.label10.TabIndex = 18;
             this.label10.Text = "Codice fiscale";
             // 
+            // epNome
+            // 
+            this.epNome.ContainerControl = this;
+            // 
+            // epCognome
+            // 
+            this.epCognome.ContainerControl = this;
+            // 
+            // epEta
+            // 
+            this.epEta.ContainerControl = this;
+            // 
+            // epCAP
+            // 
+            this.epCAP.ContainerControl = this;
+            // 
+            // epCitta
+            // 
+            this.epCitta.ContainerControl = this;
+            // 
+            // epCF
+            // 
+            this.epCF.ContainerControl = this;
+            // 
+            // epMail
+            // 
+            this.epMail.ContainerControl = this;
+            // 
+            // epUsername
+            // 
+            this.epUsername.ContainerControl = this;
+            // 
+            // epPassword
+            // 
+            this.epPassword.ContainerControl = this;
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.Location = new System.Drawing.Point(12, 355);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(0, 13);
+            this.lblResult.TabIndex = 20;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 372);
+            this.ClientSize = new System.Drawing.Size(304, 433);
+            this.Controls.Add(this.lblResult);
             this.Controls.Add(this.txtCF);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnRegistrati);
@@ -274,6 +340,15 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Registrati";
+            ((System.ComponentModel.ISupportInitialize)(this.epNome)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCognome)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epEta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCAP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCitta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epMail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epUsername)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPassword)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,6 +376,16 @@
         private System.Windows.Forms.Button btnRegistrati;
         private System.Windows.Forms.TextBox txtCF;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ErrorProvider epNome;
+        private System.Windows.Forms.ErrorProvider epCognome;
+        private System.Windows.Forms.ErrorProvider epEta;
+        private System.Windows.Forms.ErrorProvider epCAP;
+        private System.Windows.Forms.ErrorProvider epCitta;
+        private System.Windows.Forms.ErrorProvider epCF;
+        private System.Windows.Forms.ErrorProvider epMail;
+        private System.Windows.Forms.ErrorProvider epUsername;
+        private System.Windows.Forms.ErrorProvider epPassword;
+        private System.Windows.Forms.Label lblResult;
     }
 }
 
