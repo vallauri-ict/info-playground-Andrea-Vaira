@@ -60,6 +60,7 @@ namespace Compito_form_con_controllo_Regex
             }
             if (reg.IsMatch(txtEtà.Text) && txtEtà.Text.Length != 0 && (Convert.ToInt32(txtEtà.Text) >= 0 && Convert.ToInt32(txtEtà.Text) <= 120))
                 ripulisciCampi(txtEtà, epEta);
+            //regex con controllo età integrato: ^([1-9]{0,1}[0-9]|1[0-1][0-9])$
         } 
 
         private void txtCAP_Leave(object sender, EventArgs e)
@@ -73,11 +74,11 @@ namespace Compito_form_con_controllo_Regex
             if (reg.IsMatch(txtCAP.Text))
                 ripulisciCampi(txtCAP, epCAP);
         }
-
+        
         private void txtCitta_Leave(object sender, EventArgs e)
         {
-            Regex reg = new Regex(@"^[a-zA-Z]{3,}\s[A-Z]{2}$");
-            if (!reg.IsMatch(txtCitta.Text) && txtCAP.Text.Length != 0)
+            Regex reg = new Regex(@"^[a-zA-Z]{3,}\s\([A-Z]{2}\)$");
+            if (!reg.IsMatch(txtCitta.Text) && txtCitta.Text.Length != 0)
             {
                 txtCitta.ForeColor = Color.Red;
                 epCitta.SetError(txtCitta, "Inserire citta' corretta");
@@ -100,7 +101,7 @@ namespace Compito_form_con_controllo_Regex
 
         private void txtMail_Leave(object sender, EventArgs e)
         {
-            Regex reg = new Regex(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+            Regex reg = new Regex(@"^(\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)(,\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)*$");
             if (!reg.IsMatch(txtMail.Text) && txtMail.Text.Length != 0)
             {
                 txtMail.ForeColor = Color.Red;
@@ -112,7 +113,7 @@ namespace Compito_form_con_controllo_Regex
 
         private void txtUsername_Leave(object sender, EventArgs e)
         {
-            Regex reg = new Regex(@"^[a-z A-Z]{1}[a-zA-Z0-9]{4,}$");
+            Regex reg = new Regex(@"^[a-z A-Z]{1}[a-zA-Z0-9]{4,}$"); // \w include anche '_'
             if(!reg.IsMatch(txtUsername.Text) && txtUsername.Text.Length != 0)
             {
                 txtUsername.ForeColor = Color.Red;
@@ -124,7 +125,7 @@ namespace Compito_form_con_controllo_Regex
 
         private void txtPassword_Leave(object sender, EventArgs e)
         {
-            Regex reg = new Regex(@"^[a-zA-Z0-9]{7,14}[-+!]+$");
+            Regex reg = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[-+!])[-+!A-Za-z\d]{8,}$"); // fatta in classe controlla se ci sono lettere e numeri poi controlla la stringa
             if (!reg.IsMatch(txtPassword.Text) && txtPassword.Text.Length != 0)
             {
                 txtPassword.ForeColor = Color.Red;
