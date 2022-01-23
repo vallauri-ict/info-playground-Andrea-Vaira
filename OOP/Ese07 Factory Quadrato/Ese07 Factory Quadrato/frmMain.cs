@@ -45,7 +45,7 @@ namespace Ese07_Factory_Quadrato
             Singleton s2 = Singleton.GetInstance();
             MessageBox.Show("Progressivo: "+s1.n); //se funziona, non dovrebbe incrementare il valore di n siccome non deve instanziare un nuovo oggetto
 
-            MessageBox.Show("Prima instanza: " + s1 + "\nSeconda instanza" + s2);
+            MessageBox.Show("Prima instanza: " + s1 + "\nSeconda instanza: " + s2);
         }
 
         private void btnIndexata_Click(object sender, EventArgs e)
