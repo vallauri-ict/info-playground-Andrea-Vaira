@@ -39,15 +39,7 @@ namespace CalendarioGregoriano
             day = dayObj;
             month = monthObj;
             year = yearObj;
-            bisestile = true;
-            if (yearObj % 4 == 0)
-            {
-                bisestile = true;
-            }
-            else
-            {
-                bisestile = false;
-            }
+            bisestile = DateTime.IsLeapYear(yearObj);
         }
 
         public override string ToString()
