@@ -9,7 +9,7 @@ namespace ScontroTraVeicoli
     class Auto: Veicolo
     {
         public int Dimensione { get; set; }
-        public Auto()
+        public Auto() : base()
         {
             Probabilità = 10;
             Tipo = 'A';

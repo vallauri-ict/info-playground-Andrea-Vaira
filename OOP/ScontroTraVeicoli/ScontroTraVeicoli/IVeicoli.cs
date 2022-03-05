@@ -8,6 +8,6 @@ namespace ScontroTraVeicoli
 {
     interface IVeicoli
     {
-        Veicolo Scontro(Veicolo v1, Veicolo v2);
+        Veicolo Scontro(Veicolo v2);
     }
 }
