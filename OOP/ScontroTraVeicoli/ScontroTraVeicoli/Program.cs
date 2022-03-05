@@ -50,11 +50,17 @@ namespace ScontroTraVeicoli
                 int index = rnd.Next(0, lstVeicoli.Count);
                 Veicolo v = lstVeicoli[index];
                 index = rnd.Next(0, lstVeicoli.Count);
+                stampaScontro(v, lstVeicoli[index]);
                 lstVeicoli.Remove(v.Scontro(lstVeicoli[index]));
                 stampaLista(lstVeicoli);
             }
 
             Console.ReadKey();
+        }
+
+        private static void stampaScontro(Veicolo v1, Veicolo v2)
+        {
+            Console.WriteLine("Scontro tra "+v1.Name+" e "+v2.Name);
         }
 
         private static void stampaLista(List<Veicolo> lst)
