@@ -13,9 +13,11 @@ namespace gestionaleEventi
     {
         static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
 
-        /*public static string SerializeToJson(BindingList<Veicolo> veicoli, string filePath = null)
+        #region Iscritti
+        public static string SerializeToJsonIscritti(BindingList<iscritto> iscritti)
         {
-            string serializedData = JsonConvert.SerializeObject(veicoli, jsonSettings);
+            string filePath = Directory.GetCurrentDirectory() + "\\iscritti.json";
+            string serializedData = JsonConvert.SerializeObject(iscritti, jsonSettings);
 
             if (filePath != null)
             {
@@ -24,15 +26,43 @@ namespace gestionaleEventi
             return serializedData;
         }
 
-        public static BindingList<Veicolo> DeserializeFromJson(string json)
+        public static BindingList<iscritto> DeserializeFromJsonIscritti(string json)
         {
-            return JsonConvert.DeserializeObject<BindingList<Veicolo>>(json, jsonSettings);
+            return JsonConvert.DeserializeObject<BindingList<iscritto>>(json, jsonSettings);
         }
 
-        public static BindingList<Veicolo> DeserializeFromFile(string filePath)
+        public static BindingList<iscritto> DeserializeFromFileIscritti()
         {
-            string dataFromFile = File.ReadAllText(filePath);
-            return DeserializeFromJson(dataFromFile);
-        }*/
+            string dataFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\iscritti.json");
+            return DeserializeFromJsonIscritti(dataFromFile);
+        }
+        #endregion
+
+        #region Eventi
+        public static string SerializeToJsonEventi(BindingList<evento> eventi)
+        {
+            string filePath = Directory.GetCurrentDirectory() + "\\eventi.json";
+            string serializedData = JsonConvert.SerializeObject(eventi, jsonSettings);
+
+            if (filePath != null)
+            {
+                File.WriteAllText(filePath, serializedData);
+            }
+            return serializedData;
+        }
+
+        public static BindingList<evento> DeserializeFromJsonEventi(string json)
+        {
+            return JsonConvert.DeserializeObject<BindingList<evento>>(json, jsonSettings);
+        }
+
+        public static BindingList<evento> DeserializeFromFileEventi()
+        {
+            //string dataFromFile = File.ReadAllText(filePath);
+            string dataFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\eventi.json");
+            return DeserializeFromJsonEventi(dataFromFile);
+        }
+        #endregion
     }
 }
+ 
