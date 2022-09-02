@@ -48,9 +48,24 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.panelloNuovoEvento = new System.Windows.Forms.Panel();
+            this.lblGestioneEvento = new System.Windows.Forms.Label();
+            this.btnGestioneEvento = new System.Windows.Forms.Button();
+            this.dtpDataEvento = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtCostoEvento = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtDescrizioneEvento = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtDenominazioneEvento = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtTipologiaEvento = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnNuovoEvento = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIscritti)).BeginInit();
             this.panelloNuovoIscritto.SuspendLayout();
+            this.panelloNuovoEvento.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvEventi
@@ -258,11 +273,149 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "Email";
             // 
+            // panelloNuovoEvento
+            // 
+            this.panelloNuovoEvento.Controls.Add(this.lblGestioneEvento);
+            this.panelloNuovoEvento.Controls.Add(this.btnGestioneEvento);
+            this.panelloNuovoEvento.Controls.Add(this.dtpDataEvento);
+            this.panelloNuovoEvento.Controls.Add(this.label9);
+            this.panelloNuovoEvento.Controls.Add(this.txtCostoEvento);
+            this.panelloNuovoEvento.Controls.Add(this.label11);
+            this.panelloNuovoEvento.Controls.Add(this.txtDescrizioneEvento);
+            this.panelloNuovoEvento.Controls.Add(this.label12);
+            this.panelloNuovoEvento.Controls.Add(this.txtDenominazioneEvento);
+            this.panelloNuovoEvento.Controls.Add(this.label13);
+            this.panelloNuovoEvento.Controls.Add(this.txtTipologiaEvento);
+            this.panelloNuovoEvento.Controls.Add(this.label14);
+            this.panelloNuovoEvento.Location = new System.Drawing.Point(12, 472);
+            this.panelloNuovoEvento.Name = "panelloNuovoEvento";
+            this.panelloNuovoEvento.Size = new System.Drawing.Size(539, 280);
+            this.panelloNuovoEvento.TabIndex = 8;
+            // 
+            // lblGestioneEvento
+            // 
+            this.lblGestioneEvento.AutoSize = true;
+            this.lblGestioneEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGestioneEvento.Location = new System.Drawing.Point(135, 8);
+            this.lblGestioneEvento.Name = "lblGestioneEvento";
+            this.lblGestioneEvento.Size = new System.Drawing.Size(160, 24);
+            this.lblGestioneEvento.TabIndex = 36;
+            this.lblGestioneEvento.Text = "Aggiungi Iscritto";
+            // 
+            // btnGestioneEvento
+            // 
+            this.btnGestioneEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestioneEvento.Location = new System.Drawing.Point(30, 219);
+            this.btnGestioneEvento.Name = "btnGestioneEvento";
+            this.btnGestioneEvento.Size = new System.Drawing.Size(208, 52);
+            this.btnGestioneEvento.TabIndex = 35;
+            this.btnGestioneEvento.Text = "Aggiungi";
+            this.btnGestioneEvento.UseVisualStyleBackColor = true;
+            this.btnGestioneEvento.Click += new System.EventHandler(this.btnGestioneEvento_Click);
+            // 
+            // dtpDataEvento
+            // 
+            this.dtpDataEvento.Location = new System.Drawing.Point(209, 139);
+            this.dtpDataEvento.Name = "dtpDataEvento";
+            this.dtpDataEvento.Size = new System.Drawing.Size(200, 20);
+            this.dtpDataEvento.TabIndex = 34;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(27, 140);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(42, 17);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "Data";
+            // 
+            // txtCostoEvento
+            // 
+            this.txtCostoEvento.Location = new System.Drawing.Point(150, 165);
+            this.txtCostoEvento.Name = "txtCostoEvento";
+            this.txtCostoEvento.Size = new System.Drawing.Size(259, 20);
+            this.txtCostoEvento.TabIndex = 30;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(27, 166);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 17);
+            this.label11.TabIndex = 29;
+            this.label11.Text = "Costo";
+            // 
+            // txtDescrizioneEvento
+            // 
+            this.txtDescrizioneEvento.Location = new System.Drawing.Point(150, 114);
+            this.txtDescrizioneEvento.Name = "txtDescrizioneEvento";
+            this.txtDescrizioneEvento.Size = new System.Drawing.Size(259, 20);
+            this.txtDescrizioneEvento.TabIndex = 28;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(27, 115);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(93, 17);
+            this.label12.TabIndex = 27;
+            this.label12.Text = "Descrizione";
+            // 
+            // txtDenominazioneEvento
+            // 
+            this.txtDenominazioneEvento.Location = new System.Drawing.Point(150, 88);
+            this.txtDenominazioneEvento.Name = "txtDenominazioneEvento";
+            this.txtDenominazioneEvento.Size = new System.Drawing.Size(259, 20);
+            this.txtDenominazioneEvento.TabIndex = 26;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(27, 89);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(119, 17);
+            this.label13.TabIndex = 25;
+            this.label13.Text = "Denominazione";
+            // 
+            // txtTipologiaEvento
+            // 
+            this.txtTipologiaEvento.Location = new System.Drawing.Point(150, 62);
+            this.txtTipologiaEvento.Name = "txtTipologiaEvento";
+            this.txtTipologiaEvento.Size = new System.Drawing.Size(259, 20);
+            this.txtTipologiaEvento.TabIndex = 24;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(27, 63);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(75, 17);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "Tipologia";
+            // 
+            // btnNuovoEvento
+            // 
+            this.btnNuovoEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuovoEvento.Location = new System.Drawing.Point(433, 418);
+            this.btnNuovoEvento.Name = "btnNuovoEvento";
+            this.btnNuovoEvento.Size = new System.Drawing.Size(179, 57);
+            this.btnNuovoEvento.TabIndex = 7;
+            this.btnNuovoEvento.Text = "NUOVO EVENTO";
+            this.btnNuovoEvento.UseVisualStyleBackColor = true;
+            this.btnNuovoEvento.Click += new System.EventHandler(this.btnNuovoEvento_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1277, 755);
+            this.Controls.Add(this.panelloNuovoEvento);
+            this.Controls.Add(this.btnNuovoEvento);
             this.Controls.Add(this.panelloNuovoIscritto);
             this.Controls.Add(this.dgvIscritti);
             this.Controls.Add(this.btnNuovoIscritto);
@@ -276,6 +429,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvIscritti)).EndInit();
             this.panelloNuovoIscritto.ResumeLayout(false);
             this.panelloNuovoIscritto.PerformLayout();
+            this.panelloNuovoEvento.ResumeLayout(false);
+            this.panelloNuovoEvento.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,6 +457,20 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panelloNuovoEvento;
+        private System.Windows.Forms.Label lblGestioneEvento;
+        private System.Windows.Forms.Button btnGestioneEvento;
+        private System.Windows.Forms.DateTimePicker dtpDataEvento;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtCostoEvento;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtDescrizioneEvento;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtDenominazioneEvento;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtTipologiaEvento;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnNuovoEvento;
     }
 }
 

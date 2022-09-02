@@ -33,6 +33,7 @@ namespace gestionaleEventi
             dgvIscritti.Visible = false;
             btnNuovoIscritto.Visible = false;
             panelloNuovoIscritto.Visible = false;
+            panelloNuovoEvento.Visible = false;
         }
 
         private void setupDgvEventi()
@@ -79,6 +80,17 @@ namespace gestionaleEventi
             uploadDgvIscritti(id); // id dell'evento
             dgvIscritti.Visible = true;
             btnNuovoIscritto.Visible = true;
+
+            txtTipologiaEvento.Text = row.Cells[1].Value.ToString();
+            txtDenominazioneEvento.Text = row.Cells[2].Value.ToString(); 
+            txtDescrizioneEvento.Text = row.Cells[3].Value.ToString();
+            dtpDataEvento.Value = Convert.ToDateTime(row.Cells[4].Value.ToString());
+            txtCostoEvento.Text = row.Cells[5].Value.ToString();
+
+            lblGestioneEvento.Text = "Modifica";
+            btnGestioneEvento.Text = "Modifica";
+
+            panelloNuovoEvento.Visible = true;
         }
 
         private void uploadDgvIscritti(int id)
@@ -91,7 +103,15 @@ namespace gestionaleEventi
                     iscrittiAdEventoSelezionato.Add(item);
                 }
             }
-            dgvIscritti.RowCount = iscrittiAdEventoSelezionato.Count();
+            if(iscrittiAdEventoSelezionato.Count() > 0)
+            {
+                dgvIscritti.RowCount = iscrittiAdEventoSelezionato.Count();
+                dgvIscritti.Visible = true;
+            }
+            else
+            {
+                dgvIscritti.Visible = false;
+            }
 
             int i = 0;
             foreach (var item in iscrittiAdEventoSelezionato)
@@ -128,25 +148,28 @@ namespace gestionaleEventi
         {
 
             DataGridViewRow row = dgvIscritti.Rows[e.RowIndex];
+            if (row.Cells[0].Value != null)
+            {
+                txtEmail.Text = row.Cells[0].Value.ToString();
+                txtEmail.ReadOnly = true;
+                txtTelefono.Text = row.Cells[1].Value.ToString();
+                txtTelefono.ReadOnly = true;
+                txtNome.Text = row.Cells[2].Value.ToString();
+                txtCognome.Text = row.Cells[3].Value.ToString();
+                cmbGenere.SelectedIndex = row.Cells[4].Value.ToString() == "M" ? 0 : 1;
+                dtpDataNascita.Value = Convert.ToDateTime(row.Cells[5].Value);
+                btnGestisciIscritto.Text = "Modifica";
+                lblGestisciIscritto.Text = "Modifica";
 
-            txtEmail.Text = row.Cells[0].Value.ToString();
-            txtEmail.ReadOnly = true;
-            txtTelefono.Text = row.Cells[1].Value.ToString();
-            txtTelefono.ReadOnly = true;
-            txtNome.Text = row.Cells[2].Value.ToString();
-            txtCognome.Text = row.Cells[3].Value.ToString();
-            cmbGenere.SelectedIndex = row.Cells[4].Value.ToString() == "M" ? 0 : 1;
-            dtpDataNascita.Value = Convert.ToDateTime(row.Cells[5].Value);
-            btnGestisciIscritto.Text = "Modifica";
-            lblGestisciIscritto.Text = "Modifica";
-
-            panelloNuovoIscritto.Visible = true;
+                panelloNuovoIscritto.Visible = true;
+            }
+            
         }
 
         private void btnGestisciIscritto_Click(object sender, EventArgs e)
         {
             char gender = cmbGenere.SelectedIndex == 0 ? 'M' : 'F';
-            iscritto iscrittoModificato = new iscritto(txtEmail.Text, Convert.ToDouble(txtTelefono.Text), txtNome.Text,
+            iscritto iscrittoGestito = new iscritto(txtEmail.Text, Convert.ToDouble(txtTelefono.Text), txtNome.Text,
             txtCognome.Text, gender, dtpDataNascita.Value, id);
 
             iscritti = JsonTools.DeserializeFromFileIscritti();
@@ -155,15 +178,15 @@ namespace gestionaleEventi
                 bool modificato = false;
                 foreach (var item in iscritti)
                 {
-                    if (item.email == iscrittoModificato.email && item.telefono == iscrittoModificato.telefono && item.idEvento == iscrittoModificato.idEvento)
+                    if (item.email == iscrittoGestito.email && item.telefono == iscrittoGestito.telefono && item.idEvento == iscrittoGestito.idEvento)
                     {
-                        item.email = iscrittoModificato.email;
-                        item.telefono = iscrittoModificato.telefono;
-                        item.nome = iscrittoModificato.nome;
-                        item.cognome = iscrittoModificato.cognome;
-                        item.genere = iscrittoModificato.genere;
-                        item.data_nascita = iscrittoModificato.data_nascita;
-                        item.idEvento = iscrittoModificato.idEvento;
+                        item.email = iscrittoGestito.email;
+                        item.telefono = iscrittoGestito.telefono;
+                        item.nome = iscrittoGestito.nome;
+                        item.cognome = iscrittoGestito.cognome;
+                        item.genere = iscrittoGestito.genere;
+                        item.data_nascita = iscrittoGestito.data_nascita;
+                        item.idEvento = iscrittoGestito.idEvento;
                         modificato = true;
                     }
                 }
@@ -179,13 +202,91 @@ namespace gestionaleEventi
             }
             else if (btnGestisciIscritto.Text == "Aggiungi")
             {
-                iscritti.Add(iscrittoModificato);
-                JsonTools.SerializeToJsonIscritti(iscritti);
-                MessageBox.Show("Iscritto aggiunto con successo");
+                bool aggiungi = true;
+                foreach (var item in iscritti)
+                {
+                    if(item.email == iscrittoGestito.email && item.telefono == iscrittoGestito.telefono && item.idEvento == iscrittoGestito.idEvento)
+                    {
+                        aggiungi = false;
+                    }
+                }
+                if (aggiungi)
+                {
+                    iscritti.Add(iscrittoGestito);
+                    JsonTools.SerializeToJsonIscritti(iscritti);
+                    MessageBox.Show("Iscritto aggiunto con successo");
+                }
+                else
+                {
+                    MessageBox.Show("Errore nell'aggiunta dell'iscritto");
+                }
+                
             }
 
             uploadDgvIscritti(id);
             panelloNuovoIscritto.Visible = false;
+        }
+
+        private void btnNuovoEvento_Click(object sender, EventArgs e)
+        {
+            txtTipologiaEvento.Text = "";
+            txtDenominazioneEvento.Text = "";
+            txtDescrizioneEvento.Text = "";
+            dtpDataEvento.Value = DateTime.Now;
+            txtCostoEvento.Text = "";
+
+            lblGestioneEvento.Text = "Aggiungi";
+            btnGestioneEvento.Text = "Aggiungi";
+
+            panelloNuovoEvento.Visible = true;
+        }
+
+        private void btnGestioneEvento_Click(object sender, EventArgs e)
+        {
+            
+
+            if (btnGestioneEvento.Text == "Aggiungi")
+            {
+                int idEvento = eventi[eventi.Count - 1].idEvento + 1;
+                evento eventoGestito = new evento(idEvento, txtTipologiaEvento.Text, txtDenominazioneEvento.Text, txtDescrizioneEvento.Text,
+                    dtpDataEvento.Value, Convert.ToDouble(txtCostoEvento.Text));
+
+                eventi.Add(eventoGestito);
+                MessageBox.Show("Evento aggiunto correttamente");
+                JsonTools.SerializeToJsonEventi(eventi);
+            }
+            else
+            {
+                evento eventoGestito = new evento(id, txtTipologiaEvento.Text, txtDenominazioneEvento.Text, txtDescrizioneEvento.Text,
+                    dtpDataEvento.Value, Convert.ToDouble(txtCostoEvento.Text));
+
+                bool modificato = false;
+                foreach (var item in eventi)
+                {
+                    if (item.idEvento == eventoGestito.idEvento)
+                    {
+                        item.tipologia = eventoGestito.tipologia;
+                        item.denominazione = eventoGestito.denominazione;
+                        item.descrizione = eventoGestito.descrizione;
+                        item.data = eventoGestito.data;
+                        item.costo = eventoGestito.costo;
+                        modificato = true;
+                    }
+                }
+                if (modificato)
+                {
+                    MessageBox.Show("Evento modificato correttamente");
+                    JsonTools.SerializeToJsonEventi(eventi);
+                }
+                else
+                {
+                    MessageBox.Show("Errore durante la modifica dell'evento");
+                }
+            }
+
+            eventi = JsonTools.DeserializeFromFileEventi();
+            setupDgvEventi();
+            panelloNuovoEvento.Visible = false;
         }
     }
 }

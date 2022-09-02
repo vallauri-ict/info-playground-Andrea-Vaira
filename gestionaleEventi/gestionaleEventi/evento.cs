@@ -13,10 +13,10 @@ namespace gestionaleEventi
         public string denominazione;
         public string descrizione;
         public DateTime data;
-        public float costo;
+        public double costo;
         public string prezzo;
 
-        public evento(int idEvento, string tipologia, string denominazione, string descrizione, DateTime data, float costo)
+        public evento(int idEvento, string tipologia, string denominazione, string descrizione, DateTime data, double costo)
         {
             this.idEvento = idEvento;
             this.tipologia = tipologia;
@@ -24,7 +24,7 @@ namespace gestionaleEventi
             this.descrizione = descrizione;
             this.data = data;
             this.costo = costo;
-            this.prezzo = costo.ToString() + "€";
+            this.prezzo = costo.ToString() + " €";
         }
     }
 }
