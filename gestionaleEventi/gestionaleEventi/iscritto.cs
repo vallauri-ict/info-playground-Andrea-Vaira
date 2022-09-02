@@ -9,14 +9,14 @@ namespace gestionaleEventi
     public class iscritto
     {
         public string email; // chiave primaria
-        public int telefono; // chiave primaria
+        public double telefono; // chiave primaria
         public string nome;
         public string cognome;
         public char genere;
         public DateTime data_nascita;
         public int idEvento; // chiave esterna
 
-        public iscritto(string email, int phone, string name,
+        public iscritto(string email, double phone, string name,
             string surname, char gender, DateTime date, int idEvento)
         {
             this.email = email;

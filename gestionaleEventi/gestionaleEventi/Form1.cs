@@ -32,6 +32,7 @@ namespace gestionaleEventi
             setupDgvIscritti();
             dgvIscritti.Visible = false;
             btnNuovoIscritto.Visible = false;
+            panelloNuovoIscritto.Visible = false;
         }
 
         private void setupDgvEventi()
@@ -107,22 +108,84 @@ namespace gestionaleEventi
 
         private void btnNuovoIscritto_Click(object sender, EventArgs e)
         {
-            interfacciaIscritto form2 = new interfacciaIscritto(id);
-            form2.ShowDialog();
-            dgvIscritti.Visible = false;
+            txtEmail.ReadOnly = false;
+            txtTelefono.ReadOnly = false;
+            txtEmail.Text = "";
+            txtTelefono.Text = "";
+            txtNome.Text = "";
+            txtCognome.Text = "";
+            cmbGenere.SelectedIndex = -1;
+            dtpDataNascita.Value = DateTime.Now;
+            btnGestisciIscritto.Text = "Aggiungi";
+            lblGestisciIscritto.Text = "Aggiungi";
+
+            panelloNuovoIscritto.Visible = true;
+
+
         }
 
         private void dgvIscritti_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
             DataGridViewRow row = dgvIscritti.Rows[e.RowIndex];
-            interfacciaIscritto form2 = new interfacciaIscritto(new iscritto(
-                row.Cells[0].Value.ToString(), Convert.ToInt32(row.Cells[1].Value), row.Cells[2].Value.ToString(),
-                row.Cells[3].Value.ToString(), Convert.ToChar(row.Cells[4].Value), 
-                Convert.ToDateTime(row.Cells[5].Value.ToString()), id), id);
-            
-            form2.ShowDialog();
-            dgvIscritti.Visible = false;
+
+            txtEmail.Text = row.Cells[0].Value.ToString();
+            txtEmail.ReadOnly = true;
+            txtTelefono.Text = row.Cells[1].Value.ToString();
+            txtTelefono.ReadOnly = true;
+            txtNome.Text = row.Cells[2].Value.ToString();
+            txtCognome.Text = row.Cells[3].Value.ToString();
+            cmbGenere.SelectedIndex = row.Cells[4].Value.ToString() == "M" ? 0 : 1;
+            dtpDataNascita.Value = Convert.ToDateTime(row.Cells[5].Value);
+            btnGestisciIscritto.Text = "Modifica";
+            lblGestisciIscritto.Text = "Modifica";
+
+            panelloNuovoIscritto.Visible = true;
+        }
+
+        private void btnGestisciIscritto_Click(object sender, EventArgs e)
+        {
+            char gender = cmbGenere.SelectedIndex == 0 ? 'M' : 'F';
+            iscritto iscrittoModificato = new iscritto(txtEmail.Text, Convert.ToDouble(txtTelefono.Text), txtNome.Text,
+            txtCognome.Text, gender, dtpDataNascita.Value, id);
+
+            iscritti = JsonTools.DeserializeFromFileIscritti();
+            if (btnGestisciIscritto.Text == "Modifica")
+            {
+                bool modificato = false;
+                foreach (var item in iscritti)
+                {
+                    if (item.email == iscrittoModificato.email && item.telefono == iscrittoModificato.telefono && item.idEvento == iscrittoModificato.idEvento)
+                    {
+                        item.email = iscrittoModificato.email;
+                        item.telefono = iscrittoModificato.telefono;
+                        item.nome = iscrittoModificato.nome;
+                        item.cognome = iscrittoModificato.cognome;
+                        item.genere = iscrittoModificato.genere;
+                        item.data_nascita = iscrittoModificato.data_nascita;
+                        item.idEvento = iscrittoModificato.idEvento;
+                        modificato = true;
+                    }
+                }
+                if (modificato)
+                {
+                    MessageBox.Show("Modifica avvenuta con successo");
+                    JsonTools.SerializeToJsonIscritti(iscritti);
+                }
+                else
+                {
+                    MessageBox.Show("Errore nella modifica dell'iscritto");
+                }
+            }
+            else if (btnGestisciIscritto.Text == "Aggiungi")
+            {
+                iscritti.Add(iscrittoModificato);
+                JsonTools.SerializeToJsonIscritti(iscritti);
+                MessageBox.Show("Iscritto aggiunto con successo");
+            }
+
+            uploadDgvIscritti(id);
+            panelloNuovoIscritto.Visible = false;
         }
     }
 }
