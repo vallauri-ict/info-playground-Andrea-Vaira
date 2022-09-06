@@ -62,10 +62,19 @@
             this.txtTipologiaEvento = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.btnNuovoEvento = new System.Windows.Forms.Button();
+            this.btnCancellaEvento = new System.Windows.Forms.Button();
+            this.btnCancellaIscritto = new System.Windows.Forms.Button();
+            this.rbtM = new System.Windows.Forms.RadioButton();
+            this.rbtF = new System.Windows.Forms.RadioButton();
+            this.rbtTutti = new System.Windows.Forms.RadioButton();
+            this.grbFiltri = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.chkFiltraPerAnno = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIscritti)).BeginInit();
             this.panelloNuovoIscritto.SuspendLayout();
             this.panelloNuovoEvento.SuspendLayout();
+            this.grbFiltri.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvEventi
@@ -127,6 +136,7 @@
             // 
             // panelloNuovoIscritto
             // 
+            this.panelloNuovoIscritto.Controls.Add(this.btnCancellaIscritto);
             this.panelloNuovoIscritto.Controls.Add(this.lblGestisciIscritto);
             this.panelloNuovoIscritto.Controls.Add(this.btnGestisciIscritto);
             this.panelloNuovoIscritto.Controls.Add(this.dtpDataNascita);
@@ -275,6 +285,7 @@
             // 
             // panelloNuovoEvento
             // 
+            this.panelloNuovoEvento.Controls.Add(this.btnCancellaEvento);
             this.panelloNuovoEvento.Controls.Add(this.lblGestioneEvento);
             this.panelloNuovoEvento.Controls.Add(this.btnGestioneEvento);
             this.panelloNuovoEvento.Controls.Add(this.dtpDataEvento);
@@ -409,11 +420,102 @@
             this.btnNuovoEvento.UseVisualStyleBackColor = true;
             this.btnNuovoEvento.Click += new System.EventHandler(this.btnNuovoEvento_Click);
             // 
+            // btnCancellaEvento
+            // 
+            this.btnCancellaEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancellaEvento.Location = new System.Drawing.Point(244, 219);
+            this.btnCancellaEvento.Name = "btnCancellaEvento";
+            this.btnCancellaEvento.Size = new System.Drawing.Size(208, 52);
+            this.btnCancellaEvento.TabIndex = 37;
+            this.btnCancellaEvento.Text = "Elimina";
+            this.btnCancellaEvento.UseVisualStyleBackColor = true;
+            this.btnCancellaEvento.Click += new System.EventHandler(this.btnCancellaEvento_Click);
+            // 
+            // btnCancellaIscritto
+            // 
+            this.btnCancellaIscritto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancellaIscritto.Location = new System.Drawing.Point(244, 219);
+            this.btnCancellaIscritto.Name = "btnCancellaIscritto";
+            this.btnCancellaIscritto.Size = new System.Drawing.Size(208, 52);
+            this.btnCancellaIscritto.TabIndex = 38;
+            this.btnCancellaIscritto.Text = "Elimina";
+            this.btnCancellaIscritto.UseVisualStyleBackColor = true;
+            this.btnCancellaIscritto.Click += new System.EventHandler(this.btnCancellaIscritto_Click);
+            // 
+            // rbtM
+            // 
+            this.rbtM.AutoSize = true;
+            this.rbtM.Location = new System.Drawing.Point(6, 19);
+            this.rbtM.Name = "rbtM";
+            this.rbtM.Size = new System.Drawing.Size(34, 17);
+            this.rbtM.TabIndex = 9;
+            this.rbtM.Text = "M";
+            this.rbtM.UseVisualStyleBackColor = true;
+            this.rbtM.CheckedChanged += new System.EventHandler(this.rbtM_CheckedChanged);
+            // 
+            // rbtF
+            // 
+            this.rbtF.AutoSize = true;
+            this.rbtF.Location = new System.Drawing.Point(45, 19);
+            this.rbtF.Name = "rbtF";
+            this.rbtF.Size = new System.Drawing.Size(31, 17);
+            this.rbtF.TabIndex = 10;
+            this.rbtF.Text = "F";
+            this.rbtF.UseVisualStyleBackColor = true;
+            this.rbtF.CheckedChanged += new System.EventHandler(this.rbtF_CheckedChanged);
+            // 
+            // rbtTutti
+            // 
+            this.rbtTutti.AutoSize = true;
+            this.rbtTutti.Checked = true;
+            this.rbtTutti.Location = new System.Drawing.Point(82, 19);
+            this.rbtTutti.Name = "rbtTutti";
+            this.rbtTutti.Size = new System.Drawing.Size(46, 17);
+            this.rbtTutti.TabIndex = 11;
+            this.rbtTutti.TabStop = true;
+            this.rbtTutti.Text = "Tutti";
+            this.rbtTutti.UseVisualStyleBackColor = true;
+            this.rbtTutti.CheckedChanged += new System.EventHandler(this.rbtTutti_CheckedChanged);
+            // 
+            // grbFiltri
+            // 
+            this.grbFiltri.Controls.Add(this.chkFiltraPerAnno);
+            this.grbFiltri.Controls.Add(this.dateTimePicker1);
+            this.grbFiltri.Controls.Add(this.rbtM);
+            this.grbFiltri.Controls.Add(this.rbtTutti);
+            this.grbFiltri.Controls.Add(this.rbtF);
+            this.grbFiltri.Location = new System.Drawing.Point(682, 428);
+            this.grbFiltri.Name = "grbFiltri";
+            this.grbFiltri.Size = new System.Drawing.Size(315, 38);
+            this.grbFiltri.TabIndex = 12;
+            this.grbFiltri.TabStop = false;
+            this.grbFiltri.Text = "Filtri";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(241, 15);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(68, 20);
+            this.dateTimePicker1.TabIndex = 12;
+            // 
+            // chkFiltraPerAnno
+            // 
+            this.chkFiltraPerAnno.AutoSize = true;
+            this.chkFiltraPerAnno.Location = new System.Drawing.Point(142, 15);
+            this.chkFiltraPerAnno.Name = "chkFiltraPerAnno";
+            this.chkFiltraPerAnno.Size = new System.Drawing.Size(93, 17);
+            this.chkFiltraPerAnno.TabIndex = 13;
+            this.chkFiltraPerAnno.Text = "Filtra per anno";
+            this.chkFiltraPerAnno.UseVisualStyleBackColor = true;
+            this.chkFiltraPerAnno.CheckedChanged += new System.EventHandler(this.chkFiltraPerAnno_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1277, 755);
+            this.Controls.Add(this.grbFiltri);
             this.Controls.Add(this.panelloNuovoEvento);
             this.Controls.Add(this.btnNuovoEvento);
             this.Controls.Add(this.panelloNuovoIscritto);
@@ -431,6 +533,8 @@
             this.panelloNuovoIscritto.PerformLayout();
             this.panelloNuovoEvento.ResumeLayout(false);
             this.panelloNuovoEvento.PerformLayout();
+            this.grbFiltri.ResumeLayout(false);
+            this.grbFiltri.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -471,6 +575,14 @@
         private System.Windows.Forms.TextBox txtTipologiaEvento;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnNuovoEvento;
+        private System.Windows.Forms.Button btnCancellaIscritto;
+        private System.Windows.Forms.Button btnCancellaEvento;
+        private System.Windows.Forms.RadioButton rbtM;
+        private System.Windows.Forms.RadioButton rbtF;
+        private System.Windows.Forms.RadioButton rbtTutti;
+        private System.Windows.Forms.GroupBox grbFiltri;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.CheckBox chkFiltraPerAnno;
     }
 }
 

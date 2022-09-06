@@ -32,8 +32,12 @@ namespace gestionaleEventi
             setupDgvIscritti();
             dgvIscritti.Visible = false;
             btnNuovoIscritto.Visible = false;
+            grbFiltri.Visible = false;
             panelloNuovoIscritto.Visible = false;
             panelloNuovoEvento.Visible = false;
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy";
+            dateTimePicker1.ShowUpDown = true;
         }
 
         private void setupDgvEventi()
@@ -80,6 +84,7 @@ namespace gestionaleEventi
             uploadDgvIscritti(id); // id dell'evento
             dgvIscritti.Visible = true;
             btnNuovoIscritto.Visible = true;
+            grbFiltri.Visible = true;
 
             txtTipologiaEvento.Text = row.Cells[1].Value.ToString();
             txtDenominazioneEvento.Text = row.Cells[2].Value.ToString(); 
@@ -91,6 +96,7 @@ namespace gestionaleEventi
             btnGestioneEvento.Text = "Modifica";
 
             panelloNuovoEvento.Visible = true;
+            btnCancellaEvento.Visible = true;
         }
 
         private void uploadDgvIscritti(int id)
@@ -100,7 +106,15 @@ namespace gestionaleEventi
             {
                 if(item.idEvento == id)
                 {
-                    iscrittiAdEventoSelezionato.Add(item);
+                    if ((rbtM.Checked && item.genere == 'M') ||
+                    (rbtF.Checked && item.genere == 'F') ||
+                    (rbtTutti.Checked))
+                    {
+                        if((chkFiltraPerAnno.Checked && dateTimePicker1.Value.ToString("yyyy") == item.data_nascita.ToString("yyyy")) ||
+                            (!chkFiltraPerAnno.Checked))
+                            iscrittiAdEventoSelezionato.Add(item);
+                    }
+                        
                 }
             }
             if(iscrittiAdEventoSelezionato.Count() > 0)
@@ -110,10 +124,17 @@ namespace gestionaleEventi
             }
             else
             {
+                
+                dgvIscritti.RowCount = 1;
+                for (int j = 0; j < 6; j++)
+                {
+                    dgvIscritti.Rows[0].Cells[j].Value = null;
+                }
                 dgvIscritti.Visible = false;
             }
 
             int i = 0;
+            iscrittiAdEventoSelezionato = ordinaIscrittiPerCognome();
             foreach (var item in iscrittiAdEventoSelezionato)
             {
                 dgvIscritti.Rows[i].Cells[0].Value = item.email;
@@ -123,7 +144,49 @@ namespace gestionaleEventi
                 dgvIscritti.Rows[i].Cells[4].Value = item.genere;
                 dgvIscritti.Rows[i].Cells[5].Value = item.data_nascita.ToShortDateString();
                 i++;
+                
             }
+        }
+
+        private BindingList<iscritto> ordinaIscrittiPerCognome()
+        {
+            iscritto[] vetIscritti = new iscritto[iscrittiAdEventoSelezionato.Count()];
+            int i = 0;
+            foreach (var item in iscrittiAdEventoSelezionato)
+            {
+                vetIscritti[i++] = item;
+            }
+
+            for (i = 0; i < vetIscritti.Length; i++)
+            {
+                int min = i;
+                for (int j = i + 1; j < vetIscritti.Length; j++)
+                {
+                    string str1 = vetIscritti[min].cognome + vetIscritti[min].nome;
+                    string str2 = vetIscritti[j].cognome + vetIscritti[j].nome;
+                    if (String.Compare(str1, str2)>0)
+                    {
+                        min = j;
+                    }
+                }
+
+                if (min != i)
+                {
+                    iscritto lowerValue = vetIscritti[min];
+                    vetIscritti[min] = vetIscritti[i];
+                    vetIscritti[i] = lowerValue;
+                }
+            }
+
+            BindingList<iscritto> iscrittiOrdinati = new BindingList<iscritto>();
+            foreach (var item in vetIscritti)
+            {
+                iscrittiOrdinati.Add(item);
+            }
+
+
+            return iscrittiOrdinati;
+
         }
 
         private void btnNuovoIscritto_Click(object sender, EventArgs e)
@@ -140,6 +203,7 @@ namespace gestionaleEventi
             lblGestisciIscritto.Text = "Aggiungi";
 
             panelloNuovoIscritto.Visible = true;
+            btnCancellaIscritto.Visible = false;
 
 
         }
@@ -162,6 +226,7 @@ namespace gestionaleEventi
                 lblGestisciIscritto.Text = "Modifica";
 
                 panelloNuovoIscritto.Visible = true;
+                btnCancellaIscritto.Visible=true;
             }
             
         }
@@ -239,6 +304,7 @@ namespace gestionaleEventi
             btnGestioneEvento.Text = "Aggiungi";
 
             panelloNuovoEvento.Visible = true;
+            btnCancellaEvento.Visible = false;
         }
 
         private void btnGestioneEvento_Click(object sender, EventArgs e)
@@ -287,6 +353,67 @@ namespace gestionaleEventi
             eventi = JsonTools.DeserializeFromFileEventi();
             setupDgvEventi();
             panelloNuovoEvento.Visible = false;
+        }
+
+        private void btnCancellaEvento_Click(object sender, EventArgs e)
+        { 
+            if(MessageBox.Show("Vuoi eliminare definitivamente l'evento?", "Elimina", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                foreach(var item in eventi)
+                {
+                    if(item.idEvento == id)
+                    {
+                        eventi.Remove(item);
+                        break;
+                    }
+                        
+                }
+                JsonTools.SerializeToJsonEventi(eventi);
+            }
+            panelloNuovoEvento.Visible = false;
+            uploadDgvIscritti(1);
+            setupDgvEventi();
+        }
+
+        private void btnCancellaIscritto_Click(object sender, EventArgs e)
+        {
+            string email = txtEmail.Text;
+            string telefono = txtTelefono.Text;
+            if (MessageBox.Show("Vuoi eliminare definitivamente l'iscrito?", "Elimina", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                foreach (var item in iscritti)
+                {
+                    if (item.idEvento == id && item.email == email && item.telefono == Convert.ToDouble(telefono))
+                    {
+                        iscritti.Remove(item);
+                        break;
+                    }
+
+                }
+                JsonTools.SerializeToJsonIscritti(iscritti);
+            }
+            panelloNuovoIscritto.Visible = false;
+            uploadDgvIscritti(id);
+        }
+
+        private void rbtM_CheckedChanged(object sender, EventArgs e)
+        {
+            uploadDgvIscritti(id);
+        }
+
+        private void rbtF_CheckedChanged(object sender, EventArgs e)
+        {
+            uploadDgvIscritti(id);
+        }
+
+        private void rbtTutti_CheckedChanged(object sender, EventArgs e)
+        {
+            uploadDgvIscritti(id);
+        }
+
+        private void chkFiltraPerAnno_CheckedChanged(object sender, EventArgs e)
+        {
+            uploadDgvIscritti(id);
         }
     }
 }
