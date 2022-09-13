@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace gestionaleEventi
 {
@@ -42,25 +43,72 @@ namespace gestionaleEventi
 
         private void setupDgvEventi()
         {
-            string[] intestazioni = new string[] { "id evento", "Tipologia", "Denominazione", "Descrizione", "Data", "Costo", "Prezzo" };
-            dgvEventi.ColumnCount = 7;
+            string[] intestazioni = new string[] { "Tipologia", "Denominazione", "Descrizione", "Data", "Costo", "Prezzo" };
+            dgvEventi.ColumnCount = 6;
             foreach (DataGridViewColumn column in dgvEventi.Columns)
             {
                 column.HeaderText = intestazioni[column.Index];
             }
-            dgvEventi.RowCount = eventi.Count();
+            
 
+            int i = 0;
+            eventi = JsonTools.DeserializeFromFileEventi();
+            OrdinaEventiPerData();
+            BindingList<evento> eventiSelezionati = new BindingList<evento>();
+            foreach (var item in eventi)
+            {
+                if ((txtCercaEvento.Text != "" && txtCercaEvento.Text != "Cerca evento ...") && item.denominazione == txtCercaEvento.Text)
+                {
+                    eventiSelezionati.Add(item);
+                }
+            }
+            dgvEventi.RowCount = eventiSelezionati.Count() == 0 ? ; // TO DO
+            foreach (var item in eventiSelezionati)
+            {
+                dgvEventi.Rows[i].Cells[0].Value = item.tipologia;
+                dgvEventi.Rows[i].Cells[1].Value = item.denominazione;
+                dgvEventi.Rows[i].Cells[2].Value = item.descrizione;
+                dgvEventi.Rows[i].Cells[3].Value = item.data.ToShortDateString();
+                dgvEventi.Rows[i].Cells[4].Value = item.costo;
+                dgvEventi.Rows[i].Cells[5].Value = item.prezzo;
+                i++;
+            }
+        }
+
+        private void OrdinaEventiPerData()
+        {
+            evento[] vetEvento = new evento[eventi.Count()];
             int i = 0;
             foreach (var item in eventi)
             {
-                dgvEventi.Rows[i].Cells[0].Value = item.idEvento;
-                dgvEventi.Rows[i].Cells[1].Value = item.tipologia;
-                dgvEventi.Rows[i].Cells[2].Value = item.denominazione;
-                dgvEventi.Rows[i].Cells[3].Value = item.descrizione;
-                dgvEventi.Rows[i].Cells[4].Value = item.data.ToShortDateString();
-                dgvEventi.Rows[i].Cells[5].Value = item.costo;
-                dgvEventi.Rows[i].Cells[6].Value = item.prezzo;
-                i++;
+                vetEvento[i++] = item;
+            }
+
+            for (i = 0; i < vetEvento.Length; i++)
+            {
+                int min = i;
+                for (int j = i + 1; j < vetEvento.Length; j++)
+                {
+                    DateTime date1 = vetEvento[min].data;
+                    DateTime date2 = vetEvento[j].data;
+                    if (DateTime.Compare(date1, date2) > 0)
+                    {
+                        min = j;
+                    }
+                }
+
+                if (min != i)
+                {
+                    evento lowerValue = vetEvento[min];
+                    vetEvento[min] = vetEvento[i];
+                    vetEvento[i] = lowerValue;
+                }
+            }
+
+            eventi.Clear();
+            foreach (var item in vetEvento)
+            {
+                eventi.Add(item);
             }
         }
 
@@ -369,6 +417,16 @@ namespace gestionaleEventi
                         
                 }
                 JsonTools.SerializeToJsonEventi(eventi);
+                foreach (var item in iscritti)
+                {
+                    if (item.idEvento == id)
+                    {
+                        iscritti.Remove(item);
+                        break;
+                    }
+
+                }
+                JsonTools.SerializeToJsonIscritti(iscritti);
             }
             panelloNuovoEvento.Visible = false;
             uploadDgvIscritti(1);
